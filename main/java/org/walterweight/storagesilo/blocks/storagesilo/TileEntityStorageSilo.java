@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import org.walterweight.storagesilo.StorageSilo;
 
 public class TileEntityStorageSilo extends TileEntity implements IInventory {
 	protected ItemStack[] inventory;
@@ -17,7 +18,7 @@ public class TileEntityStorageSilo extends TileEntity implements IInventory {
 
 	@Override
 	public int getSizeInventory() {
-		return 999;
+		return StorageSilo.siloCapacity;
 	}
 
 	@Override

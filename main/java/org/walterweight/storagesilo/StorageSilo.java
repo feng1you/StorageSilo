@@ -1,6 +1,8 @@
 package org.walterweight.storagesilo;
 
 
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.config.Property;
 import org.walterweight.storagesilo.blocks.ModBlocks;
 import org.walterweight.storagesilo.blocks.storagesilo.TileEntityStorageSilo;
 import org.walterweight.storagesilo.proxy.CommonProxy;
@@ -19,6 +21,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class StorageSilo
 {
 
+    public static int siloCapacity;
+
     @Instance(Reference.MODID)
     public static StorageSilo instance;
 
@@ -30,12 +34,19 @@ public class StorageSilo
     {
         ModBlocks.init();
         registerTileEntities();
+        getConfiguration(event);
     }
 
-    //todo: maybe this should be moved into its own thing
     private void registerTileEntities()
     {
         GameRegistry.registerTileEntity(TileEntityStorageSilo.class, "tileDeepStorageChest");
+    }
+
+    private void getConfiguration(FMLPreInitializationEvent event){
+        Configuration config = new Configuration(event.getSuggestedConfigurationFile());
+        config.load();
+        siloCapacity = config.getInt("StorageSiloCapacity", Configuration.CATEGORY_GENERAL, 999, 54, 999, "The number of available slots in each StorageSilo");
+        config.save();
     }
 
     @EventHandler
