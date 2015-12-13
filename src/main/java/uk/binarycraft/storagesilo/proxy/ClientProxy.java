@@ -4,6 +4,7 @@ public class ClientProxy extends CommonProxy
 {
 	//public static int renderPass;
 
+
 	@Override
 	public void initClient()
 	{

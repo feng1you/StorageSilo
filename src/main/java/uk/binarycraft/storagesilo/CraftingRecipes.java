@@ -1,13 +1,14 @@
 package uk.binarycraft.storagesilo;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.init.Items;
-import uk.binarycraft.storagesilo.blocks.ModBlocks;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import uk.binarycraft.storagesilo.blocks.ModBlocks;
 
 
-public class CraftingRecipes {
+public class CraftingRecipes
+{
 
 	ItemStack storageSilo = new ItemStack(ModBlocks.storageSilo);
 	ItemStack craftingSilo = new ItemStack(ModBlocks.craftingSilo);
@@ -18,7 +19,8 @@ public class CraftingRecipes {
 	ItemStack craftingTable = new ItemStack(Blocks.crafting_table);
 
 
-	public void init() {
+	public void init()
+	{
 		GameRegistry.addRecipe(storageSilo, "ccc", "cec", "ccc", 'c', chest, 'e', enderChest);
 		GameRegistry.addRecipe(craftingSilo, "ede", "csc", "ede", 'e', eyeOfEnder, 'd', diamond, 'c', craftingTable, 's', storageSilo);
 

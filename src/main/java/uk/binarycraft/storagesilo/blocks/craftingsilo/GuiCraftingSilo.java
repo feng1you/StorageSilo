@@ -22,12 +22,12 @@ public class GuiCraftingSilo extends GuiContainer
 
 	private static final ResourceLocation guiTexture = new ResourceLocation(
 			"storagesilo:textures/gui/craftingsilo.png");
+	// private boolean unknownBool;
+	public TileEntityCraftingSilo tileEntityCraftingSilo;
 	private float currentScroll;
 	private boolean isScrolling;
 	private boolean wasClicking;
 	private GuiTextField searchField;
-	// private boolean unknownBool;
-	public TileEntityCraftingSilo tileEntityCraftingSilo;
 	private ContainerCraftingSilo container;
 	private ItemSorter sorter = new ItemSorter();
 	private List<SlotSearchable> items = new ArrayList();
@@ -143,7 +143,7 @@ public class GuiCraftingSilo extends GuiContainer
 			if (itemStackToClear == null)
 				continue;
 
-//			itemStackToClear = AttemptToMoveCraftingGridSlotStackToInventory(itemStackToClear);
+			//			itemStackToClear = AttemptToMoveCraftingGridSlotStackToInventory(itemStackToClear);
 
 			if (itemStackToClear.stackSize > 0)
 				DumpCraftingFridSlotStackToWorld(itemStackToClear);

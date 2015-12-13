@@ -1,15 +1,5 @@
 package uk.binarycraft.storagesilo.blocks.storagesilo;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
-
-import uk.binarycraft.storagesilo.inventory.SlotSearchable;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,22 +7,35 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GL11;
+import uk.binarycraft.storagesilo.inventory.SlotSearchable;
 
-public class GuiStorageSilo extends GuiContainer {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+public class GuiStorageSilo extends GuiContainer
+{
+
 	private static final ResourceLocation guiTexture = new ResourceLocation(
 			"storagesilo:textures/gui/storagesilo.png");
+	// private boolean unknownBool;
+	public TileEntityStorageSilo storehouse;
 	private float currentScroll;
 	private boolean isScrolling;
 	private boolean wasClicking;
 	private GuiTextField searchField;
-	// private boolean unknownBool;
-	public TileEntityStorageSilo storehouse;
 	private ContainerStorageSilo container;
 	private ItemSorter sorter = new ItemSorter();
 	private List<SlotSearchable> items = new ArrayList();
 	private boolean hasBeenDrawn = false;
 
-	public GuiStorageSilo(EntityPlayer player, TileEntityStorageSilo storehouse) {
+
+	public GuiStorageSilo(EntityPlayer player, TileEntityStorageSilo storehouse)
+	{
 		super(new ContainerStorageSilo(player, storehouse));
 
 		this.ySize = 222;
@@ -42,8 +45,10 @@ public class GuiStorageSilo extends GuiContainer {
 
 	}
 
+
 	@Override
-	public void initGui() {
+	public void initGui()
+	{
 		super.initGui();
 		this.container = ((ContainerStorageSilo) this.inventorySlots);
 		Keyboard.enableRepeatEvents(true);
@@ -58,13 +63,18 @@ public class GuiStorageSilo extends GuiContainer {
 
 	}
 
-	public void onGuiClosed() {
+
+	public void onGuiClosed()
+	{
 		super.onGuiClosed();
 		Keyboard.enableRepeatEvents(false);
 	}
 
-	public void drawScreen(int par1, int par2, float par3) {
-		if (!hasBeenDrawn) {
+
+	public void drawScreen(int par1, int par2, float par3)
+	{
+		if (!hasBeenDrawn)
+		{
 			// this will just sort the inventory for the first time it is opened
 			hasBeenDrawn = true;
 			updateSearch(true);
@@ -77,24 +87,29 @@ public class GuiStorageSilo extends GuiContainer {
 		int k1 = i1 + 12;
 		int l1 = j1 + 108;
 
-		if (!this.wasClicking && flag && par1 >= i1 && par2 >= j1 && par1 < k1 && par2 < l1) {
+		if (!this.wasClicking && flag && par1 >= i1 && par2 >= j1 && par1 < k1 && par2 < l1)
+		{
 			this.isScrolling = this.needsScrollBars();
 		}
 
-		if (!flag) {
+		if (!flag)
+		{
 			this.isScrolling = false;
 		}
 
 		this.wasClicking = flag;
 
-		if (this.isScrolling) {
+		if (this.isScrolling)
+		{
 			this.currentScroll = ((float) (par2 - j1) - 7.5F) / ((float) (l1 - j1) - 15.0F);
 
-			if (this.currentScroll < 0.0F) {
+			if (this.currentScroll < 0.0F)
+			{
 				this.currentScroll = 0.0F;
 			}
 
-			if (this.currentScroll > 1.0F) {
+			if (this.currentScroll > 1.0F)
+			{
 				this.currentScroll = 1.0F;
 			}
 
@@ -105,12 +120,16 @@ public class GuiStorageSilo extends GuiContainer {
 		super.drawScreen(par1, par2, par3);
 	}
 
-	private boolean needsScrollBars() {
+
+	private boolean needsScrollBars()
+	{
 		return storehouse.getSizeInventory() > 54;
 	}
 
+
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {
+	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
+	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.mc.renderEngine.bindTexture(guiTexture);
 		int var5 = (this.width - this.xSize) / 2;
@@ -120,50 +139,64 @@ public class GuiStorageSilo extends GuiContainer {
 		int i1 = this.guiLeft + 175;
 		int k = this.guiTop + 22;
 		int l = k + 108;
-		if (this.needsScrollBars()) {
+		if (this.needsScrollBars())
+		{
 			int x1 = i1;
 			// int x2 = x1 + 12;
 			int y1 = k + (int) ((float) (l - k - 17) * this.currentScroll);
 			// int y2 = y1 + 15;
 
 			this.drawTexturedModalRect(x1, y1, 0, 0, 12, 15);
-		} else {
+		} else
+		{
 			this.drawTexturedModalRect(i1, k, 0, 16, 12, 15);
 		}
 
 		this.searchField.drawTextBox();
 
-		if (storehouse.isDirty) {
+		if (storehouse.isDirty)
+		{
 			updateSearch(false);
 			storehouse.isDirty = false;
 		}
 
 	}
 
-	public boolean doesGuiPauseGame() {
+
+	public boolean doesGuiPauseGame()
+	{
 		return false;
 	}
 
-	public void setInventorySlotContents(int i, ItemStack itemStack) {
+
+	public void setInventorySlotContents(int i, ItemStack itemStack)
+	{
 
 		storehouse.setInventorySlotContents(i, itemStack);
 
 		storehouse.markDirty();
 	}
 
-	@Override
-	protected void keyTyped(char p_73869_1_, int p_73869_2_) {
 
-		if (!this.checkHotbarKeys(p_73869_2_)) {
-			if (this.searchField.textboxKeyTyped(p_73869_1_, p_73869_2_)) {
+	@Override
+	protected void keyTyped(char p_73869_1_, int p_73869_2_)
+	{
+
+		if (!this.checkHotbarKeys(p_73869_2_))
+		{
+			if (this.searchField.textboxKeyTyped(p_73869_1_, p_73869_2_))
+			{
 				this.updateSearch(true);
-			} else {
+			} else
+			{
 				super.keyTyped(p_73869_1_, p_73869_2_);
 			}
 		}
 	}
 
-	public void handleMouseInput() {
+
+	public void handleMouseInput()
+	{
 
 		// removed because it was too laggy
 		// if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) ||
@@ -174,35 +207,44 @@ public class GuiStorageSilo extends GuiContainer {
 
 		int i = Mouse.getEventDWheel();
 
-		if (i != 0 && this.needsScrollBars()) {
+		if (i != 0 && this.needsScrollBars())
+		{
 
 			int j = storehouse.getSizeInventory() / 9 - 6;
 
-			if (i > 0) {
+			if (i > 0)
+			{
 				i = items.size() > 1000 ? 6 : 2;
 			}
-			if (i < 0) {
+			if (i < 0)
+			{
 				i = items.size() > 1000 ? -6 : -2;
 			}
 
 			this.currentScroll = (float) ((double) this.currentScroll - (double) i / (double) j);
-			if (this.currentScroll < 0.0F) {
+			if (this.currentScroll < 0.0F)
+			{
 				this.currentScroll = 0.0F;
 			}
-			if (this.currentScroll > 1.0F) {
+			if (this.currentScroll > 1.0F)
+			{
 				this.currentScroll = 1.0F;
 			}
 			this.scrollTo(this.currentScroll);
-		} else {
+		} else
+		{
 			super.handleMouseInput();
 		}
 	}
 
-	private void scrollTo(float position) {
+
+	private void scrollTo(float position)
+	{
 
 		int numItems = items.size();
 
-		for (int i = 0; i < storehouse.getSizeInventory(); i++) {
+		for (int i = 0; i < storehouse.getSizeInventory(); i++)
+		{
 			SlotSearchable slot = (SlotSearchable) container.getSlot(i);
 			slot.xDisplayPosition = -10000;
 			slot.yDisplayPosition = -10000;
@@ -214,9 +256,11 @@ public class GuiStorageSilo extends GuiContainer {
 		start = Math.max(start, 0);
 		int startIndex = start * 9;
 		int endIndex = startIndex + 53;
-		for (int i = 0; i < numItems; i++) {
+		for (int i = 0; i < numItems; i++)
+		{
 			SlotSearchable slot = items.get(i);
-			if (i >= startIndex && i <= endIndex) {
+			if (i >= startIndex && i <= endIndex)
+			{
 				int x = (i - startIndex) % 9;
 				int y = (i - startIndex - x) / 9;
 				slot.xDisplayPosition = 8 + x * 18;
@@ -226,12 +270,16 @@ public class GuiStorageSilo extends GuiContainer {
 		}
 	}
 
-	private void updateSearch(boolean resetScroll) {
+
+	private void updateSearch(boolean resetScroll)
+	{
 		items.clear();
-		for (int i = 0; i < storehouse.getSizeInventory(); i++) {
+		for (int i = 0; i < storehouse.getSizeInventory(); i++)
+		{
 			SlotSearchable slot = (SlotSearchable) container.getSlot(i);
 			slot.setMatchesSearch(searchField.getText());
-			if (slot.getMatchesSearch()) {
+			if (slot.getMatchesSearch())
+			{
 				items.add(slot);
 			}
 		}
@@ -241,15 +289,22 @@ public class GuiStorageSilo extends GuiContainer {
 		scrollTo(this.currentScroll);
 	}
 
-	public static class ItemSorter implements Comparator<Slot> {
-		public int compare(Slot slot1, Slot slot2) {
-			if (!slot1.getHasStack()) {
-				if (!slot2.getHasStack()) {
+
+	public static class ItemSorter implements Comparator<Slot>
+	{
+
+		public int compare(Slot slot1, Slot slot2)
+		{
+			if (!slot1.getHasStack())
+			{
+				if (!slot2.getHasStack())
+				{
 					return 0;
 				}
 				return 1;
 			}
-			if (!slot2.getHasStack()) {
+			if (!slot2.getHasStack())
+			{
 				return -1;
 			}
 			// both have a stack if we reach this
@@ -258,7 +313,8 @@ public class GuiStorageSilo extends GuiContainer {
 
 			int t = intCompare(id1, id2);
 
-			if (t == 0) {
+			if (t == 0)
+			{
 				int m1 = slot1.getStack().getItemDamage();
 				int m2 = slot2.getStack().getItemDamage();
 
@@ -268,11 +324,15 @@ public class GuiStorageSilo extends GuiContainer {
 			return t;
 		}
 
-		public int intCompare(int a, int b) {
-			if (a == b) {
+
+		public int intCompare(int a, int b)
+		{
+			if (a == b)
+			{
 				return 0;
 			}
-			if (a > b) {
+			if (a > b)
+			{
 				return -1;
 			}
 			return 1;

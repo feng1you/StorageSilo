@@ -8,38 +8,53 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import uk.binarycraft.storagesilo.StorageSilo;
 
-public class TileEntityCraftingSilo extends TileEntity implements IInventory {
-	protected ItemStack[] inventory;
-	public boolean isDirty;
+public class TileEntityCraftingSilo extends TileEntity implements IInventory
+{
 
-	public TileEntityCraftingSilo() {
+	public boolean isDirty;
+	protected ItemStack[] inventory;
+
+
+	public TileEntityCraftingSilo()
+	{
 		inventory = new ItemStack[getSizeInventory()];
 	}
 
+
 	@Override
-	public int getSizeInventory() {
+	public int getSizeInventory()
+	{
 		return StorageSilo.siloCapacity;// + 10;
 	}
 
+
 	@Override
-	public ItemStack getStackInSlot(int slot) {
-		if (inventory.length > slot) {
+	public ItemStack getStackInSlot(int slot)
+	{
+		if (inventory.length > slot)
+		{
 			return inventory[slot];
 		}
 		return null;
 	}
 
+
 	@Override
-	public ItemStack decrStackSize(int slot, int size) {
-		if (inventory.length > slot) {
-			if (inventory[slot] != null) {
+	public ItemStack decrStackSize(int slot, int size)
+	{
+		if (inventory.length > slot)
+		{
+			if (inventory[slot] != null)
+			{
 				ItemStack itemstack;
-				if (inventory[slot].stackSize <= size) {
+				if (inventory[slot].stackSize <= size)
+				{
 					itemstack = inventory[slot];
 					inventory[slot] = null;
 					markDirty();
 					return itemstack;
-				} else {
+				} else
+				{
 					itemstack = inventory[slot].splitStack(size);
 					if (inventory[slot].stackSize == 0)
 						inventory[slot] = null;
@@ -51,53 +66,74 @@ public class TileEntityCraftingSilo extends TileEntity implements IInventory {
 		return null;
 	}
 
+
 	@Override
-	public ItemStack getStackInSlotOnClosing(int p_70304_1_) {
+	public ItemStack getStackInSlotOnClosing(int p_70304_1_)
+	{
 		return null;
 	}
 
+
 	@Override
-	public void setInventorySlotContents(int slot, ItemStack item) {
-		if (inventory.length > slot) {
+	public void setInventorySlotContents(int slot, ItemStack item)
+	{
+		if (inventory.length > slot)
+		{
 			inventory[slot] = item;
 		}
 	}
 
+
 	@Override
-	public String getInventoryName() {
+	public String getInventoryName()
+	{
 		return "Storehouse";
 	}
 
+
 	@Override
-	public boolean hasCustomInventoryName() {
+	public boolean hasCustomInventoryName()
+	{
 		return false;
 	}
 
+
 	@Override
-	public int getInventoryStackLimit() {
+	public int getInventoryStackLimit()
+	{
 		return 64;
 	}
 
+
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer p_70300_1_) {
+	public boolean isUseableByPlayer(EntityPlayer p_70300_1_)
+	{
 		return true;
 	}
 
-	@Override
-	public void openInventory() {
-	}
 
 	@Override
-	public void closeInventory() {
+	public void openInventory()
+	{
 	}
 
+
 	@Override
-	public boolean isItemValidForSlot(int slot, ItemStack item) {
+	public void closeInventory()
+	{
+	}
+
+
+	@Override
+	public boolean isItemValidForSlot(int slot, ItemStack item)
+	{
 		return true;
 	}
 
+
 	@Override
-	public void readFromNBT(NBTTagCompound nbtTag) {
+	public void readFromNBT(NBTTagCompound nbtTag)
+	{
 		System.out.println("read");
 		super.readFromNBT(nbtTag);
 
@@ -106,7 +142,8 @@ public class TileEntityCraftingSilo extends TileEntity implements IInventory {
 
 		NBTTagList nbttaglist = nbtTag.getTagList("Items", 10);
 
-		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
+		for (int i = 0; i < nbttaglist.tagCount(); ++i)
+		{
 			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			int j;
 			if (nbttagcompound1.hasKey("Slot")) // Compatibility check
@@ -114,20 +151,25 @@ public class TileEntityCraftingSilo extends TileEntity implements IInventory {
 			else
 				j = nbttagcompound1.getInteger("SlotID");
 
-			if (j >= 0 && j < this.inventory.length) {
+			if (j >= 0 && j < this.inventory.length)
+			{
 				this.inventory[j] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 			}
 		}
 	}
 
+
 	@Override
-	public void writeToNBT(NBTTagCompound nbtTag) {
+	public void writeToNBT(NBTTagCompound nbtTag)
+	{
 		System.out.println("write");
 		super.writeToNBT(nbtTag);
 
 		NBTTagList nbttaglist = new NBTTagList();
-		for (int i = 0; i < this.inventory.length; ++i) {
-			if (this.inventory[i] != null) {
+		for (int i = 0; i < this.inventory.length; ++i)
+		{
+			if (this.inventory[i] != null)
+			{
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 				nbttagcompound1.setInteger("SlotID", i);
 				this.inventory[i].writeToNBT(nbttagcompound1);
@@ -138,8 +180,10 @@ public class TileEntityCraftingSilo extends TileEntity implements IInventory {
 
 	}
 
+
 	@Override
-	public void markDirty() {
+	public void markDirty()
+	{
 		isDirty = true;
 		super.markDirty();
 	}
