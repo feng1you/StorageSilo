@@ -134,7 +134,6 @@ public class TileEntityCraftingSilo extends TileEntity implements IInventory
 	@Override
 	public void readFromNBT(NBTTagCompound nbtTag)
 	{
-		System.out.println("read");
 		super.readFromNBT(nbtTag);
 
 		int invSize = getSizeInventory();
@@ -162,7 +161,6 @@ public class TileEntityCraftingSilo extends TileEntity implements IInventory
 	@Override
 	public void writeToNBT(NBTTagCompound nbtTag)
 	{
-		System.out.println("write");
 		super.writeToNBT(nbtTag);
 
 		NBTTagList nbttaglist = new NBTTagList();

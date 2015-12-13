@@ -2,10 +2,10 @@ package uk.binarycraft.storagesilo.blocks.craftingsilo;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.inventory.Slot;
-import net.minecraft.inventory.SlotCrafting;
+import net.minecraft.inventory.*;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.world.World;
 import uk.binarycraft.storagesilo.inventory.ContainerBase;
 import uk.binarycraft.storagesilo.inventory.SlotSearchable;
 
@@ -14,35 +14,56 @@ public class ContainerCraftingSilo extends ContainerBase
 
 	public InventoryCrafting craftMatrix = new InventoryCrafting(this, 3, 3);
 	private int numRows;
-	private TileEntityCraftingSilo deepStorageChest;
+	private TileEntityCraftingSilo tileEntityCraftingSilo;
+	private IInventory craftResult;
+	private World world;
 
 
-	public ContainerCraftingSilo(EntityPlayer player, TileEntityCraftingSilo deepStorageChest)
+	public ContainerCraftingSilo(EntityPlayer player, TileEntityCraftingSilo tileEntityCraftingSilo)
 	{
-		super(deepStorageChest);
-		this.deepStorageChest = deepStorageChest;
+		super(tileEntityCraftingSilo);
+		this.tileEntityCraftingSilo = tileEntityCraftingSilo;
+		this.craftResult = new InventoryCraftResult();
+		this.world = player.worldObj;
 
-		this.numRows = deepStorageChest.getSizeInventory() / 9;
-
+		this.numRows = tileEntityCraftingSilo.getSizeInventory() / 9;
 		for (int row = 0; row < numRows; ++row)
-		{
 			for (int slot = 0; slot < 9; ++slot)
-			{
-				this.addSlotToContainer(
-						new SlotSearchable(this.deepStorageChest, slot + row * 9, 8 + slot * 18, 22 + row * 18));
-			}
-		}
+				this.addSlotToContainer(new SlotSearchable(this.tileEntityCraftingSilo, slot + row * 9, 8 + slot * 18, 22 + row * 18));
+
 
 		// Add crafting Matrix - commented out, matrix no longer persistent
 		//for (int i=0; i<9; i++){
-		//	craftMatrix.setInventorySlotContents(i, deepStorageChest.getStackInSlot(deepStorageChest.getSizeInventory()-10+i));
+		//	craftMatrix.setInventorySlotContents(i, tileEntityCraftingSilo.getStackInSlot(tileEntityCraftingSilo.getSizeInventory()-10+i));
 		//}
 
 		// Add crafting output slot
-		this.addSlotToContainer(new SlotCrafting(player, craftMatrix, deepStorageChest, 9, 130, 97));
+		this.addSlotToContainer(new SlotCrafting(player, craftMatrix, craftResult, 9, 130, 97));
 		addCraftingGrid(craftMatrix, 0, 31, 80, 3, 3); //67->17
 
 		addPlayerInventorySlots(player.inventory);
+	}
+
+
+	public void onCraftMatrixChanged(IInventory inventory)
+	{
+		craftResult.setInventorySlotContents(0, CraftingManager.getInstance().findMatchingRecipe(craftMatrix, world));
+	}
+
+
+	public void onContainerClosed(EntityPlayer player)
+	{
+		super.onContainerClosed(player);
+
+		if (this.world.isRemote)
+			return;
+
+		for (int craftGridLoop = 0; craftGridLoop < 9; craftGridLoop++)
+		{
+			ItemStack itemStack = this.craftMatrix.getStackInSlotOnClosing(craftGridLoop);
+			if (itemStack != null)
+				player.dropPlayerItemWithRandomChoice(itemStack, false);
+		}
 	}
 
 

@@ -1,21 +1,21 @@
 package uk.binarycraft.storagesilo.blocks.craftingsilo;
 
-import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import uk.binarycraft.storagesilo.inventory.SlotSearchable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class GuiCraftingSilo extends GuiContainer
 {
@@ -61,23 +61,23 @@ public class GuiCraftingSilo extends GuiContainer
 		this.searchField.setCanLoseFocus(false);
 		this.searchField.setFocused(true);
 
-		buttonList.add(new GuiButton(1, guiLeft + 86, guiTop + 79, 8, 8, "x"));
+		//buttonList.add(new GuiButton(1, guiLeft + 86, guiTop + 79, 8, 8, "x"));
 	}
 
 
-	protected void actionPerformed(GuiButton guiButton)
-	{
-		if (guiButton.id != 1)
-			return;
-
-		clearCraftingGrid();
-	}
+	//	protected void actionPerformed(GuiButton guiButton)
+	//	{
+	//		if (guiButton.id != 1)
+	//			return;
+	//
+	//		//clearCraftingGrid();
+	//	}
 
 
 	public void onGuiClosed()
 	{
 		super.onGuiClosed();
-		clearCraftingGrid();
+		//clearCraftingGrid();
 		Keyboard.enableRepeatEvents(false);
 	}
 
@@ -133,114 +133,108 @@ public class GuiCraftingSilo extends GuiContainer
 	}
 
 
-	private void clearCraftingGrid()
-	{
-		System.out.println("Clearing Crafting Grid");
-		for (int craftingInventoryLoop = 0; craftingInventoryLoop < 10; craftingInventoryLoop++)
-		{
-			ItemStack itemStackToClear = container.craftMatrix.getStackInSlot(craftingInventoryLoop);
-
-			if (itemStackToClear == null)
-				continue;
-
-			//			itemStackToClear = AttemptToMoveCraftingGridSlotStackToInventory(itemStackToClear);
-
-			if (itemStackToClear.stackSize > 0)
-				DumpCraftingFridSlotStackToWorld(itemStackToClear);
-		}
-	}
-
-
-	private void DumpCraftingFridSlotStackToWorld(ItemStack itemStackToClear)
-	{
-		Random rand = new Random();
-		double randX = rand.nextFloat() * 0.8F + 0.1F;
-		double randY = rand.nextFloat() * 0.8F + 0.1F;
-		double randZ = rand.nextFloat() * 0.8F + 0.1F;
-		World world = tileEntityCraftingSilo.getWorldObj();
-		int x = tileEntityCraftingSilo.xCoord;
-		int y = tileEntityCraftingSilo.yCoord;
-		int z = tileEntityCraftingSilo.zCoord;
-
-		if (!world.isRemote)
-		{
-			System.out.println("Dumping stack of " + itemStackToClear.getDisplayName() + " to world");
-			EntityItem itemsToDrop = new EntityItem(world, x + randX, y + randY, z + randZ, itemStackToClear);
-			world.spawnEntityInWorld(itemsToDrop);
-		}
-	}
+	//	private void clearCraftingGrid()
+	//	{
+	//		for (int craftingInventoryLoop = 0; craftingInventoryLoop < 10; craftingInventoryLoop++)
+	//		{
+	//			ItemStack itemStackToClear = container.craftMatrix.getStackInSlot(craftingInventoryLoop);
+	//
+	//			if (itemStackToClear == null)
+	//				continue;
+	//
+	//			//			itemStackToClear = AttemptToMoveCraftingGridSlotStackToInventory(itemStackToClear);
+	//
+	//			//if (itemStackToClear.stackSize > 0)
+	//			//	DumpCraftingFridSlotStackToWorld(itemStackToClear);
+	//		}
+	//	}
 
 
-	private ItemStack AttemptToMoveCraftingGridSlotStackToInventory(ItemStack itemStackToClear)
-	{
-		for (int invSlotLoop = 0; invSlotLoop < tileEntityCraftingSilo.getSizeInventory(); invSlotLoop++)
-		{
-			ItemStack invStack = tileEntityCraftingSilo.getStackInSlot(invSlotLoop);
-
-			if (invStack == null)
-				return MoveItemsStackToEmptyInventorySlot(itemStackToClear, invSlotLoop, invStack);
-
-			if (invStack.getDisplayName().equals(itemStackToClear.getDisplayName()))
-				return MoveItemsToInventorySlot(itemStackToClear, invSlotLoop, invStack);
-
-		}
-		return itemStackToClear;
-	}
-
-
-	private ItemStack MoveItemsStackToEmptyInventorySlot(ItemStack itemStackToClear, int invSlotLoop, ItemStack invStack)
-	{
-		System.out.println("Found empty slot in inventory");
-		TransferAllItemsInStackToInventoryStack(itemStackToClear, invSlotLoop, invStack);
-		itemStackToClear.stackSize = 0;
-		return itemStackToClear;
-	}
-
-
-	private ItemStack MoveItemsToInventorySlot(ItemStack itemStackToClear, int invSlotLoop, ItemStack invStack)
-	{
-		System.out.println("Found inventorySlot with same items");
-		if (invStack.stackSize + itemStackToClear.stackSize > invStack.getMaxStackSize())
-			itemStackToClear = FillRemainderOfInventoryItemStack(itemStackToClear, invStack);
-		else
-			itemStackToClear = TransferAllItemsInStackToInventoryStack(itemStackToClear, invSlotLoop, invStack);
-
-		tileEntityCraftingSilo.setInventorySlotContents(invSlotLoop, invStack);
-		tileEntityCraftingSilo.markDirty();
-
-		return itemStackToClear;
-	}
+	//	private void DumpCraftingFridSlotStackToWorld(ItemStack itemStackToClear)
+	//	{
+	//		Random rand = new Random();
+	//		double randX = rand.nextFloat() * 0.8F + 0.1F;
+	//		double randY = rand.nextFloat() * 0.8F + 0.1F;
+	//		double randZ = rand.nextFloat() * 0.8F + 0.1F;
+	//		World world = tileEntityCraftingSilo.getWorldObj();
+	//		int x = tileEntityCraftingSilo.xCoord;
+	//		int y = tileEntityCraftingSilo.yCoord;
+	//		int z = tileEntityCraftingSilo.zCoord;
+	//
+	//		if (!world.isRemote)
+	//		{
+	//			EntityItem itemsToDrop = new EntityItem(world, x + randX, y + randY, z + randZ, itemStackToClear);
+	//			world.spawnEntityInWorld(itemsToDrop);
+	//		}
+	//	}
+	//
+	//
+	//	private ItemStack AttemptToMoveCraftingGridSlotStackToInventory(ItemStack itemStackToClear)
+	//	{
+	//		for (int invSlotLoop = 0; invSlotLoop < tileEntityCraftingSilo.getSizeInventory(); invSlotLoop++)
+	//		{
+	//			ItemStack invStack = tileEntityCraftingSilo.getStackInSlot(invSlotLoop);
+	//
+	//			if (invStack == null)
+	//				return MoveItemsStackToEmptyInventorySlot(itemStackToClear, invSlotLoop, invStack);
+	//
+	//			if (invStack.getDisplayName().equals(itemStackToClear.getDisplayName()))
+	//				return MoveItemsToInventorySlot(itemStackToClear, invSlotLoop, invStack);
+	//
+	//		}
+	//		return itemStackToClear;
+	//	}
 
 
-	private ItemStack TransferAllItemsInStackToInventoryStack(ItemStack itemStackToClear, int invSlotLoop, ItemStack invStack)
-	{
-		System.out.println("Removing " + itemStackToClear.getDisplayName() + " from crafting grid");
+	//	private ItemStack MoveItemsStackToEmptyInventorySlot(ItemStack itemStackToClear, int invSlotLoop, ItemStack invStack)
+	//	{
+	//		TransferAllItemsInStackToInventoryStack(itemStackToClear, invSlotLoop, invStack);
+	//		itemStackToClear.stackSize = 0;
+	//		return itemStackToClear;
+	//	}
+	//
+	//
+	//	private ItemStack MoveItemsToInventorySlot(ItemStack itemStackToClear, int invSlotLoop, ItemStack invStack)
+	//	{
+	//		if (invStack.stackSize + itemStackToClear.stackSize > invStack.getMaxStackSize())
+	//			itemStackToClear = FillRemainderOfInventoryItemStack(itemStackToClear, invStack);
+	//		else
+	//			itemStackToClear = TransferAllItemsInStackToInventoryStack(itemStackToClear, invSlotLoop, invStack);
+	//
+	//		tileEntityCraftingSilo.setInventorySlotContents(invSlotLoop, invStack);
+	//		tileEntityCraftingSilo.markDirty();
+	//
+	//		return itemStackToClear;
+	//	}
 
-		//	tileEntityCraftingSilo.setInventorySlotContents(invSlotLoop, invStack);
-		//	tileEntityCraftingSilo.markDirty();
 
-		itemStackToClear.stackSize = 0;
-
-		if (invStack == null)
-			invStack = new ItemStack(itemStackToClear.getItem());
-
-		invStack.stackSize += itemStackToClear.stackSize;
-
-		tileEntityCraftingSilo.setInventorySlotContents(invSlotLoop, invStack);
-		tileEntityCraftingSilo.markDirty();
-
-		return itemStackToClear;
-	}
-
-
-	private ItemStack FillRemainderOfInventoryItemStack(ItemStack itemStackToClear, ItemStack invStack)
-	{
-		System.out.println("Filling existing InventoryStack with " + itemStackToClear.getDisplayName() + " from crafting grid");
-		itemStackToClear.stackSize -= (invStack.stackSize + itemStackToClear.stackSize - invStack.getMaxStackSize());
-		invStack.stackSize = invStack.getMaxStackSize();
-
-		return itemStackToClear;
-	}
+	//	private ItemStack TransferAllItemsInStackToInventoryStack(ItemStack itemStackToClear, int invSlotLoop, ItemStack invStack)
+	//	{
+	//
+	//		//	tileEntityCraftingSilo.setInventorySlotContents(invSlotLoop, invStack);
+	//		//	tileEntityCraftingSilo.markDirty();
+	//
+	//		itemStackToClear.stackSize = 0;
+	//
+	//		if (invStack == null)
+	//			invStack = new ItemStack(itemStackToClear.getItem());
+	//
+	//		invStack.stackSize += itemStackToClear.stackSize;
+	//
+	//		tileEntityCraftingSilo.setInventorySlotContents(invSlotLoop, invStack);
+	//		tileEntityCraftingSilo.markDirty();
+	//
+	//		return itemStackToClear;
+	//	}
+	//
+	//
+	//	private ItemStack FillRemainderOfInventoryItemStack(ItemStack itemStackToClear, ItemStack invStack)
+	//	{
+	//		itemStackToClear.stackSize -= (invStack.stackSize + itemStackToClear.stackSize - invStack.getMaxStackSize());
+	//		invStack.stackSize = invStack.getMaxStackSize();
+	//
+	//		return itemStackToClear;
+	//	}
 
 
 	private boolean needsScrollBars()
@@ -263,13 +257,10 @@ public class GuiCraftingSilo extends GuiContainer
 		int l = k + 108;
 		if (this.needsScrollBars())
 		{
-			int x1 = i1;
-			// int x2 = x1 + 12;
 			int y1 = k + (int) ((float) (l - k - 17) * this.currentScroll);
-			// int y2 = y1 + 15;
-
-			this.drawTexturedModalRect(x1, y1, 0, 0, 12, 15);
-		} else
+			this.drawTexturedModalRect(i1, y1, 0, 0, 12, 15);
+		}
+		else
 		{
 			this.drawTexturedModalRect(i1, k, 0, 16, 12, 15);
 		}
