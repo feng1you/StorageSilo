@@ -22,7 +22,7 @@ public class StorageSilo
 	public static CreativeTab storageSiloCreativeTab;
 	@Instance(Reference.MODID)
 	public static StorageSilo instance;
-	@SidedProxy(clientSide = "ClientProxy", serverSide = "CommonProxy")
+	@SidedProxy(clientSide = "uk.binarycraft.storagesilo.proxy.ClientProxy", serverSide = "uk.binarycraft.storagesilo.proxy.CommonProxy")
 	public static CommonProxy proxy;
 	private ItemStack storageSilo = new ItemStack(ModBlocks.storageSilo);
 
