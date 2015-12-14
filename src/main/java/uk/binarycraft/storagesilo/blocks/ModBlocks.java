@@ -13,7 +13,6 @@ public class ModBlocks
 
 	public static void init()
 	{
-		System.out.println("***+++ ModBlocks.init()");
 		storageSilo = new BlockStorageSilo();
 		craftingSilo = new BlockCraftingSilo();
 	}

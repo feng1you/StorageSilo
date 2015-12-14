@@ -23,7 +23,7 @@ public class BlockContainerBase extends BlockContainer
 	{
 		super(material);
 		setBlockName(name);
-		setCreativeTab(StorageSilo.storageSiloCreativeTab);
+		this.setCreativeTab(StorageSilo.storageSiloCreativeTab);
 		setBlockTextureName(getTexture(name));
 		setHardness(hardness);
 		if (itemBlock != null)

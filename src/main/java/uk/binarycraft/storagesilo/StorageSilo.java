@@ -7,6 +7,8 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import uk.binarycraft.storagesilo.blocks.ModBlocks;
@@ -19,13 +21,19 @@ public class StorageSilo
 {
 
 	public static int siloCapacity;
-	public static CreativeTab storageSiloCreativeTab;
 	@Instance(Reference.MODID)
 	public static StorageSilo instance;
 	@SidedProxy(clientSide = "uk.binarycraft.storagesilo.proxy.ClientProxy", serverSide = "uk.binarycraft.storagesilo.proxy.CommonProxy")
 	public static CommonProxy proxy;
 	private ItemStack storageSilo = new ItemStack(ModBlocks.storageSilo);
-
+	//public static CreativeTabs storageSiloCreativeTab;
+	public static CreativeTabs storageSiloCreativeTab = new CreativeTabs("StorageSilo") {
+		@Override
+		public Item getTabIconItem()
+		{
+			return new ItemStack(ModBlocks.storageSilo).getItem();
+		}
+	};
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
@@ -33,7 +41,7 @@ public class StorageSilo
 		ModBlocks.init();
 		registerTileEntities();
 		getConfiguration(event);
-		storageSiloCreativeTab = new CreativeTab("StorageSilo");
+		//this.storageSiloCreativeTab = new StorageSiloCreativeTab("StorageSilo");
 	}
 
 

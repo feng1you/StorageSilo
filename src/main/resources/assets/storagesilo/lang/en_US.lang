@@ -1,5 +1,5 @@
 tile.storagesilo.name=Storage Silo
-tile.CraftingSilo.name=Crafting Silo
+tile.craftingsilo.name=Crafting Silo
 itemGroup.StorageSilo=Storage Silo
 gui.storagesilo=Storage Silo
 gui.craftingsilo=Crafting Silo
