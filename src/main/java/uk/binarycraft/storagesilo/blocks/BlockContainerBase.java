@@ -22,7 +22,6 @@ public class BlockContainerBase extends BlockContainer
 	protected BlockContainerBase(Material material, String name, float hardness, Class<? extends ItemBlock> itemBlock)
 	{
 		super(material);
-
 		setBlockName(name);
 		setCreativeTab(StorageSilo.storageSiloCreativeTab);
 		setBlockTextureName(getTexture(name));

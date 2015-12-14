@@ -1,9 +1,11 @@
 package uk.binarycraft.storagesilo;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import uk.binarycraft.storagesilo.blocks.storagesilo.BlockStorageSilo;
+import uk.binarycraft.storagesilo.blocks.ModBlocks;
 
 public class CreativeTab extends CreativeTabs
 {
@@ -15,10 +17,9 @@ public class CreativeTab extends CreativeTabs
 
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public Item getTabIconItem()
 	{
-		BlockStorageSilo bss = new BlockStorageSilo();
-		ItemStack is = new ItemStack(bss);
-		return is.getItem();
+		return new ItemStack(ModBlocks.storageSilo).getItem();
 	}
 }

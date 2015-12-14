@@ -8,6 +8,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import uk.binarycraft.storagesilo.StorageSilo;
 
 public class BlockBase extends Block
 {
@@ -15,9 +16,8 @@ public class BlockBase extends Block
 	protected BlockBase(Material material, String name, float hardness, Class<? extends ItemBlock> itemBlock)
 	{
 		super(material);
-
 		setBlockName(name);
-		//setCreativeTab(StorageSilo.tab);
+		setCreativeTab(StorageSilo.storageSiloCreativeTab);
 		setBlockTextureName(getTexture(name));
 		setHardness(hardness);
 		if (itemBlock != null)

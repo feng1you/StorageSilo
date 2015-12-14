@@ -15,7 +15,7 @@ import uk.binarycraft.storagesilo.StorageSilo;
 import uk.binarycraft.storagesilo.blocks.BlockContainerBase;
 import uk.binarycraft.storagesilo.gui.GuiHandler;
 
-public class BlockCraftingSilo extends BlockContainerBase// implements ICrafting
+public class BlockCraftingSilo extends BlockContainerBase
 {
 
 	@SideOnly(Side.CLIENT)
