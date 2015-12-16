@@ -17,8 +17,8 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.1.0"
-group = "org.walterweight" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+version = "1.2.0"
+group = "uk.binarycraft" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "StorageSilo"
 
 minecraft {

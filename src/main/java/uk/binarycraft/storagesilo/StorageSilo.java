@@ -21,43 +21,53 @@ public class StorageSilo
 {
 
 	public static int siloCapacity;
+	public static boolean storageSiloEnabled;
+	public static boolean craftingSiloEnabled;
 	@Instance(Reference.MODID)
 	public static StorageSilo instance;
 	@SidedProxy(clientSide = "uk.binarycraft.storagesilo.proxy.ClientProxy", serverSide = "uk.binarycraft.storagesilo.proxy.CommonProxy")
 	public static CommonProxy proxy;
-	private ItemStack storageSilo = new ItemStack(ModBlocks.storageSilo);
-	//public static CreativeTabs storageSiloCreativeTab;
 	public static CreativeTabs storageSiloCreativeTab = new CreativeTabs("StorageSilo") {
 		@Override
 		public Item getTabIconItem()
 		{
-			return new ItemStack(ModBlocks.storageSilo).getItem();
+			if (storageSiloEnabled)
+				return new ItemStack(ModBlocks.storageSilo).getItem();
+			else
+				return new ItemStack(ModBlocks.craftingSilo).getItem();
 		}
 	};
 
 	@EventHandler
-	public void preInit(FMLPreInitializationEvent event)
+	public void preInit(FMLPreInitializationEvent event) throws Exception
 	{
+		getConfiguration(event);
 		ModBlocks.init();
 		registerTileEntities();
-		getConfiguration(event);
-		//this.storageSiloCreativeTab = new StorageSiloCreativeTab("StorageSilo");
 	}
 
 
 	private void registerTileEntities()
 	{
-		GameRegistry.registerTileEntity(TileEntityStorageSilo.class, "tileDeepStorageChest");
-		GameRegistry.registerTileEntity(TileEntityCraftingSilo.class, "tileEntityCraftingSilo");
+		if (storageSiloEnabled)
+			GameRegistry.registerTileEntity(TileEntityStorageSilo.class, "tileEntityStorageSilo");
+
+		if (craftingSiloEnabled)
+			GameRegistry.registerTileEntity(TileEntityCraftingSilo.class, "tileEntityCraftingSilo");
 	}
 
 
-	private void getConfiguration(FMLPreInitializationEvent event)
+	private void getConfiguration(FMLPreInitializationEvent event) throws Exception
 	{
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 		config.load();
 		siloCapacity = config.getInt("StorageSiloCapacity", Configuration.CATEGORY_GENERAL, 999, 54, 999, "The number of available slots in each StorageSilo");
+		storageSiloEnabled = config.getBoolean("StorageSiloEnabled", Configuration.CATEGORY_GENERAL, true, "Enable or disable the StorageSilo block");
+		craftingSiloEnabled = config.getBoolean("CraftingSiloEnabled", Configuration.CATEGORY_GENERAL, true, "Enable or disable the CraftingSilo block");
 		config.save();
+
+		if (!storageSiloEnabled && !craftingSiloEnabled)
+			throw new Exception("The configuration for the StorageSilo mod is invalid, as it completely disables the mod with both blocks disabled.");
 	}
 
 

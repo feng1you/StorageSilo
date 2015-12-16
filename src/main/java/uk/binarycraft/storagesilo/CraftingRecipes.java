@@ -21,8 +21,11 @@ public class CraftingRecipes
 
 	public void init()
 	{
-		GameRegistry.addRecipe(storageSilo, "ccc", "cec", "ccc", 'c', chest, 'e', enderChest);
-		GameRegistry.addRecipe(craftingSilo, "ede", "csc", "ede", 'e', eyeOfEnder, 'd', diamond, 'c', craftingTable, 's', storageSilo);
+		if (StorageSilo.storageSiloEnabled)
+			GameRegistry.addRecipe(storageSilo, "ccc", "cec", "ccc", 'c', chest, 'e', enderChest);
+
+		if (StorageSilo.craftingSiloEnabled)
+			GameRegistry.addRecipe(craftingSilo, "ede", "csc", "ede", 'e', eyeOfEnder, 'd', diamond, 'c', craftingTable, 's', storageSilo);
 
 	}
 }
