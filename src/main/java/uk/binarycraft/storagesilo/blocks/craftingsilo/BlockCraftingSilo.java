@@ -1,7 +1,9 @@
 package uk.binarycraft.storagesilo.blocks.craftingsilo;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.BlockPos;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -87,12 +89,12 @@ public class BlockCraftingSilo extends BlockContainerBase
 
 
 	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block, int meta)
+	public void breakBlock(World world, BlockPos blockPos, IBlockState blockState)
 	{
-		TileEntityCraftingSilo tileentity = (TileEntityCraftingSilo) world.getTileEntity(x, y, z);
+		TileEntityCraftingSilo tileentity = (TileEntityCraftingSilo) world.getTileEntity(blockPos);
 
-		dropInventory(world, x, y, z, block, tileentity);
+		dropInventory(world, blockPos.getX(), blockPos.getY(), blockPos.getZ(), blockState.getBlock(), tileentity);
 
-		super.breakBlock(world, x, y, z, block, meta);
+		super.breakBlock(world, blockPos, blockState);
 	}
 }

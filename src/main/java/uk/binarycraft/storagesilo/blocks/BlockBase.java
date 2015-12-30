@@ -1,6 +1,6 @@
 package uk.binarycraft.storagesilo.blocks;
 
-import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
@@ -16,7 +16,7 @@ public class BlockBase extends Block
 	protected BlockBase(Material material, String name, float hardness, Class<? extends ItemBlock> itemBlock)
 	{
 		super(material);
-		setBlockName(name);
+		setUnlocalizedName(name);
 		setCreativeTab(StorageSilo.storageSiloCreativeTab);
 		setBlockTextureName(getTexture(name));
 		setHardness(hardness);
@@ -54,7 +54,7 @@ public class BlockBase extends Block
 	{
 		if (MathHelper.abs((float) entity.posX - (float) x) < 2.0F && MathHelper.abs((float) entity.posZ - (float) z) < 2.0F)
 		{
-			double d0 = entity.posY + 1.82D - (double) entity.yOffset;
+			double d0 = entity.posY + 1.82D - (double) entity.getYOffset();
 
 			if (d0 - (double) y > 2.0D)
 			{

@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IChatComponent;
 import uk.binarycraft.storagesilo.StorageSilo;
 
 public class TileEntityStorageSilo extends TileEntity implements IInventory
@@ -85,18 +86,18 @@ public class TileEntityStorageSilo extends TileEntity implements IInventory
 	}
 
 
-	@Override
-	public String getInventoryName()
-	{
-		return "Storehouse";
-	}
+//	@Override
+//	public String getInventoryName()
+//	{
+//		return "Storehouse";
+//	}
 
 
-	@Override
-	public boolean hasCustomInventoryName()
-	{
-		return false;
-	}
+//	@Override
+//	public boolean hasCustomInventoryName()
+//	{
+//		return false;
+//	}
 
 
 	@Override
@@ -112,25 +113,55 @@ public class TileEntityStorageSilo extends TileEntity implements IInventory
 		return true;
 	}
 
+	@Override
+	public void openInventory(EntityPlayer player) {
+
+	}
 
 	@Override
-	public void openInventory()
-	{
+	public void closeInventory(EntityPlayer player) {
 
 	}
 
 
-	@Override
-	public void closeInventory()
-	{
+//	@Override
+//	public void openInventory()
+//	{
+//
+//	}
 
-	}
+
+//	@Override
+//	public void closeInventory()
+//	{
+//
+//	}
 
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack item)
 	{
 		return true;
+	}
+
+	@Override
+	public int getField(int id) {
+		return 0;
+	}
+
+	@Override
+	public void setField(int id, int value) {
+
+	}
+
+	@Override
+	public int getFieldCount() {
+		return 0;
+	}
+
+	@Override
+	public void clear() {
+
 	}
 
 
@@ -189,4 +220,18 @@ public class TileEntityStorageSilo extends TileEntity implements IInventory
 		super.markDirty();
 	}
 
+	@Override
+	public String getCommandSenderName() {
+		return null;
+	}
+
+	@Override
+	public boolean hasCustomName() {
+		return false;
+	}
+
+	@Override
+	public IChatComponent getDisplayName() {
+		return null;
+	}
 }

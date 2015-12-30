@@ -1,6 +1,7 @@
 package uk.binarycraft.storagesilo.gui;
 
-import cpw.mods.fml.common.network.IGuiHandler;
+import net.minecraft.util.BlockPos;
+import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -19,16 +20,17 @@ public class GuiHandler implements IGuiHandler
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
-		Block block = world.getBlock(x, y, z);
+		BlockPos blockPos = new BlockPos(x, y, z);
+		Block block = world.getBlockState(blockPos).getBlock();
 		if (block instanceof BlockStorageSilo)
 		{
-			TileEntityStorageSilo tile = (TileEntityStorageSilo) world.getTileEntity(x, y, z);
+			TileEntityStorageSilo tile = (TileEntityStorageSilo) world.getTileEntity(blockPos);
 			return new ContainerStorageSilo(player, tile);
 		}
 
 		if (block instanceof BlockCraftingSilo)
 		{
-			TileEntityCraftingSilo tile = (TileEntityCraftingSilo) world.getTileEntity(x, y, z);
+			TileEntityCraftingSilo tile = (TileEntityCraftingSilo) world.getTileEntity(blockPos);
 			return new ContainerCraftingSilo(player, tile);
 		}
 		return null;
@@ -39,17 +41,18 @@ public class GuiHandler implements IGuiHandler
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
+		BlockPos blockPos = new BlockPos(x, y, z);
 		//GUI gui = GUI.fromOrdinal(ID);
-		Block block = world.getBlock(x, y, z);
+		Block block = world.getBlockState(blockPos).getBlock();
 		if (block instanceof BlockStorageSilo)
 		{
-			TileEntityStorageSilo tile = (TileEntityStorageSilo) world.getTileEntity(x, y, z);
+			TileEntityStorageSilo tile = (TileEntityStorageSilo) world.getTileEntity(blockPos);
 			return new GuiStorageSilo(player, tile);
 		}
 
 		if (block instanceof BlockCraftingSilo)
 		{
-			TileEntityCraftingSilo tile = (TileEntityCraftingSilo) world.getTileEntity(x, y, z);
+			TileEntityCraftingSilo tile = (TileEntityCraftingSilo) world.getTileEntity(blockPos);
 			return new GuiCraftingSilo(player, tile);
 		}
 

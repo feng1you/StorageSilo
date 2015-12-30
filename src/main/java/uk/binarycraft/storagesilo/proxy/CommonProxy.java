@@ -1,6 +1,6 @@
 package uk.binarycraft.storagesilo.proxy;
 
-import cpw.mods.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import uk.binarycraft.storagesilo.StorageSilo;
 import uk.binarycraft.storagesilo.gui.GuiHandler;
 

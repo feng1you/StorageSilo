@@ -1,6 +1,9 @@
 package uk.binarycraft.storagesilo.blocks;
 
-import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -22,7 +25,7 @@ public class BlockContainerBase extends BlockContainer
 	protected BlockContainerBase(Material material, String name, float hardness, Class<? extends ItemBlock> itemBlock)
 	{
 		super(material);
-		setBlockName(name);
+		setUnlocalizedName(name);
 		this.setCreativeTab(StorageSilo.storageSiloCreativeTab);
 		setBlockTextureName(getTexture(name));
 		setHardness(hardness);
@@ -104,9 +107,9 @@ public class BlockContainerBase extends BlockContainer
 
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int p6, float p7, float p8, float p9)
+	public boolean onBlockActivated(World world, BlockPos blockPos, IBlockState blockState, EntityPlayer player, EnumFacing side, float p7, float p8, float p9)
 	{
-		return super.onBlockActivated(world, x, y, z, player, p6, p7, p8, p9);
+		return super.onBlockActivated(world, blockPos, blockState, player, side, p7, p8, p9);
 	}
 
 

@@ -1,7 +1,9 @@
 package uk.binarycraft.storagesilo.blocks.storagesilo;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.BlockPos;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -80,8 +82,6 @@ public class BlockStorageSilo extends BlockContainerBase
 	}
 
 
-	;
-
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int p1)
@@ -91,12 +91,12 @@ public class BlockStorageSilo extends BlockContainerBase
 
 
 	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block, int meta)
+	public void breakBlock(World world, BlockPos blockPos, IBlockState blockState)
 	{
-		TileEntityStorageSilo tileentity = (TileEntityStorageSilo) world.getTileEntity(x, y, z);
+		TileEntityStorageSilo tileentity = (TileEntityStorageSilo) world.getTileEntity(blockPos);
 
-		dropInventory(world, x, y, z, block, tileentity);
+		dropInventory(world, blockPos.getX(), blockPos.getY(),blockPos.getZ(), blockState.getBlock(), tileentity);
 
-		super.breakBlock(world, x, y, z, block, meta);
+		super.breakBlock(world, blockPos, blockState);
 	}
 }
