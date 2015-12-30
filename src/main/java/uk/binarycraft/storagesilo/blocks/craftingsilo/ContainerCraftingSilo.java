@@ -66,6 +66,29 @@ public class ContainerCraftingSilo extends ContainerBase
 		}
 	}
 
+	@Override
+	public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int i)
+	{
+		ItemStack result = transferStackInSlotHelper(entityPlayer, i);
+
+		if (result == null)
+			return null;
+
+		for (int loop = 0; loop < 9; loop++)
+		{
+			ItemStack currentSlot = craftMatrix.getStackInSlot(loop);
+
+			if (currentSlot == null)
+				continue;
+
+			if (currentSlot.stackSize > 0)
+				craftMatrix.decrStackSize(loop, 1);
+		}
+		craftMatrix.markDirty();
+
+		return result;
+	}
+
 
 	@Override
 	protected void addPlayerInventorySlots(InventoryPlayer inventory)
