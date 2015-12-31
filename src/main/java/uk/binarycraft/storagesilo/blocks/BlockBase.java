@@ -1,5 +1,7 @@
 package uk.binarycraft.storagesilo.blocks;
 
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.BlockPos;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -18,7 +20,7 @@ public class BlockBase extends Block
 		super(material);
 		setUnlocalizedName(name);
 		setCreativeTab(StorageSilo.storageSiloCreativeTab);
-		setBlockTextureName(getTexture(name));
+		//setBlockTextureName(getTexture(name));
 		setHardness(hardness);
 		if (itemBlock != null)
 		{
@@ -45,7 +47,7 @@ public class BlockBase extends Block
 
 
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack itemStack)
+	public void onBlockPlacedBy(World world, BlockPos blockPos, IBlockState blockState, EntityLivingBase entity, ItemStack itemStack)
 	{
 	}
 

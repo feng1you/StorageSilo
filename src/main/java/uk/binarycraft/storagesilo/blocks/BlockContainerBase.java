@@ -27,7 +27,7 @@ public class BlockContainerBase extends BlockContainer
 		super(material);
 		setUnlocalizedName(name);
 		this.setCreativeTab(StorageSilo.storageSiloCreativeTab);
-		setBlockTextureName(getTexture(name));
+		//setBlockTextureName(getTexture(name));
 		setHardness(hardness);
 		if (itemBlock != null)
 		{
@@ -55,7 +55,7 @@ public class BlockContainerBase extends BlockContainer
 
 
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack itemStack)
+	public void onBlockPlacedBy(World world, BlockPos blockPos, IBlockState blockState, EntityLivingBase entity, ItemStack itemStack)
 	{
 	}
 
@@ -64,7 +64,7 @@ public class BlockContainerBase extends BlockContainer
 	{
 		if (MathHelper.abs((float) entity.posX - (float) x) < 2.0F && MathHelper.abs((float) entity.posZ - (float) z) < 2.0F)
 		{
-			double d0 = entity.posY + 1.82D - (double) entity.yOffset;
+			double d0 = entity.posY + 1.82D - (double) entity.getYOffset();
 
 			if (d0 - (double) y > 2.0D)
 			{
@@ -153,7 +153,8 @@ public class BlockContainerBase extends BlockContainer
 					}
 				}
 			}
-			world.func_147453_f(x, y, z, block);
+			//TODO: WTF is this method call. Google finds lots of usages, but nothing that documents what it might be.
+			//world.func_147453_f(x, y, z, block);
 		}
 	}
 

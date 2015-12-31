@@ -1,5 +1,10 @@
 package uk.binarycraft.storagesilo.proxy;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.item.Item;
+import uk.binarycraft.storagesilo.blocks.ModBlocks;
+
 public class ClientProxy extends CommonProxy
 {
 	//public static int renderPass;
@@ -10,4 +15,10 @@ public class ClientProxy extends CommonProxy
 	{
 	}
 
+	@Override
+	public void registerItemModels()
+	{
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(ModBlocks.craftingSilo), 0, new ModelResourceLocation("storagesilo:CraftingSilo", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(ModBlocks.storageSilo), 0, new ModelResourceLocation("storagesilo:StorageSilo", "inventory"));
+	}
 }

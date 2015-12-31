@@ -12,6 +12,7 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import uk.binarycraft.storagesilo.inventory.SlotSearchable;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -52,8 +53,7 @@ public class GuiStorageSilo extends GuiContainer
 		super.initGui();
 		this.container = ((ContainerStorageSilo) this.inventorySlots);
 		Keyboard.enableRepeatEvents(true);
-		this.searchField = new GuiTextField(this.fontRendererObj, this.guiLeft + 81, this.guiTop + 7, 85,
-				this.fontRendererObj.FONT_HEIGHT);
+		this.searchField = new GuiTextField(1, this.fontRendererObj, this.guiLeft + 81, this.guiTop + 7, 85, this.fontRendererObj.FONT_HEIGHT);
 		this.searchField.setMaxStringLength(22);
 		this.searchField.setEnableBackgroundDrawing(false);
 		this.searchField.setVisible(true);
@@ -179,7 +179,7 @@ public class GuiStorageSilo extends GuiContainer
 
 
 	@Override
-	protected void keyTyped(char p_73869_1_, int p_73869_2_)
+	protected void keyTyped(char p_73869_1_, int p_73869_2_) throws IOException
 	{
 
 		if (!this.checkHotbarKeys(p_73869_2_))
@@ -195,7 +195,7 @@ public class GuiStorageSilo extends GuiContainer
 	}
 
 
-	public void handleMouseInput()
+	public void handleMouseInput() throws IOException
 	{
 
 		// removed because it was too laggy
