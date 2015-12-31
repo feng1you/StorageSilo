@@ -74,6 +74,9 @@ public class ContainerCraftingSilo extends ContainerBase
 		if (result == null)
 			return null;
 
+		if (i != 999)
+			return result;
+
 		for (int loop = 0; loop < 9; loop++)
 		{
 			ItemStack currentSlot = craftMatrix.getStackInSlot(loop);
