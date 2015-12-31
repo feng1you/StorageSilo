@@ -74,6 +74,7 @@ public class StorageSilo
 	public void init(FMLInitializationEvent event)
 	{
 		proxy.registerItemModels();
+		registerTileEntities();
 		proxy.initClient();
 		proxy.initCommon();
 		proxy.initServer();

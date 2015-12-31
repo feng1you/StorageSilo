@@ -27,6 +27,7 @@ public class BlockCraftingSilo extends BlockContainerBase
 	{
 		super(Material.iron, "craftingsilo", 2.5f, null);
 		setStepSound(soundTypeMetal);
+		isBlockContainer = true;
 	}
 
 
