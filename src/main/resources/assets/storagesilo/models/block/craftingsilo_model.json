@@ -1,11 +1,11 @@
 {
   "parent": "block/cube",
   "textures": {
-    "down": "storagesilo:blocks/storagesilo_topbottom",
-    "up": "storagesilo:blocks/storagesilo_topbottom",
-    "north": "storagesilo:blocks/storagesilo_sides",
-    "south": "storagesilo:blocks/storagesilo_sides",
-    "east": "storagesilo:blocks/storagesilo_sides",
-    "west": "storagesilo:blocks/storagesilo_sides"
+    "down": "storagesilo:blocks/craftingsilo_topbottom",
+    "up": "storagesilo:blocks/craftingsilo_topbottom",
+    "north": "storagesilo:blocks/craftingsilo_sides",
+    "south": "storagesilo:blocks/craftingsilo_sides",
+    "east": "storagesilo:blocks/craftingsilo_sides",
+    "west": "storagesilo:blocks/craftingsilo_sides"
   }
 }

@@ -11,17 +11,9 @@ import uk.binarycraft.storagesilo.StorageSilo;
 import uk.binarycraft.storagesilo.blocks.BlockContainerBase;
 import uk.binarycraft.storagesilo.gui.GuiHandler.GUI;
 
-//import net.minecraft.client.renderer.texture.IIconRegister;
-//import net.minecraft.util.IIcon;
 
 public class BlockStorageSilo extends BlockContainerBase
 {
-
-//	@SideOnly(Side.CLIENT)
-//	protected IIcon icon_sides;
-//	@SideOnly(Side.CLIENT)
-//	protected IIcon icon_topbottom;
-
 
 	public BlockStorageSilo()
 	{
@@ -31,38 +23,6 @@ public class BlockStorageSilo extends BlockContainerBase
 	}
 
 
-//	@SideOnly(Side.CLIENT)
-//	@Override
-//	public void registerBlockIcons(IIconRegister ir)
-//	{
-//		this.icon_topbottom = ir.registerIcon(getTexture("storagesilo/storagesilo_topbottom"));
-//		this.icon_sides = ir.registerIcon(getTexture("storagesilo/storagesilo_sides"));
-//	}
-
-
-//	@Override
-//	public IIcon getIcon(int side, int meta)
-//	{
-//		int frontSide = getOrientation(meta, false);
-//		//if (side == frontSide) {
-//		if (side == 0 || side == 1)
-//		{
-//			return icon_topbottom;
-//		}
-//
-//		return this.icon_sides;
-//	}
-
-
-//	@Override
-//	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack itemStack)
-//	{
-//		int frontSide = determineOrientation(world, x, y, z, entity);
-//		world.setBlockMetadataWithNotify(x, y, z, frontSide, 2);
-//
-//	}
-
-
 	@Override
 	public boolean onBlockActivated(World world, BlockPos blockPos, IBlockState blockState, EntityPlayer player, EnumFacing p6, float p7, float p8, float p9)
 	{
@@ -70,14 +30,6 @@ public class BlockStorageSilo extends BlockContainerBase
 		return true;
 
 	}
-
-
-//	@Override
-//	public boolean hasTileEntity(int metadata)
-//	{
-//		return true;
-//	}
-
 
 
 	@Override
