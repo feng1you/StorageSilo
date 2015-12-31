@@ -13,12 +13,14 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void initClient()
 	{
+
 	}
 
 	@Override
 	public void registerItemModels()
 	{
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(ModBlocks.craftingSilo), 0, new ModelResourceLocation("storagesilo:CraftingSilo", "inventory"));
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(ModBlocks.storageSilo), 0, new ModelResourceLocation("storagesilo:StorageSilo", "inventory"));
+		System.out.println("registerItemModels()");
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(ModBlocks.craftingSilo), 0, new ModelResourceLocation("storagesilo:craftingsilo", "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(ModBlocks.storageSilo), 0, new ModelResourceLocation("storagesilo:storagesilo", "inventory"));
 	}
 }

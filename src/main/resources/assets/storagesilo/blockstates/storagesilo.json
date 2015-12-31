@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "normal": {
+      "model": "storagesilo:storagesilo_model"
+    },
+    "inventory": {
+      "model": "storagesilo:storagesilo_model"
+    }
+  }
+}

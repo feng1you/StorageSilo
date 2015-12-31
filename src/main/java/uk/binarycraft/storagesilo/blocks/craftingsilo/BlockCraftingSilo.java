@@ -1,22 +1,18 @@
 package uk.binarycraft.storagesilo.blocks.craftingsilo;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-//import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-//import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import uk.binarycraft.storagesilo.StorageSilo;
 import uk.binarycraft.storagesilo.blocks.BlockContainerBase;
 import uk.binarycraft.storagesilo.gui.GuiHandler;
+
+//import net.minecraft.client.renderer.texture.IIconRegister;
+//import net.minecraft.util.IIcon;
 
 public class BlockCraftingSilo extends BlockContainerBase
 {
@@ -97,5 +93,12 @@ public class BlockCraftingSilo extends BlockContainerBase
 		dropInventory(world, blockPos.getX(), blockPos.getY(), blockPos.getZ(), blockState.getBlock(), tileentity);
 
 		super.breakBlock(world, blockPos, blockState);
+	}
+
+
+	@Override
+	public int getRenderType()
+	{
+		return 3;
 	}
 }

@@ -1,16 +1,16 @@
 package uk.binarycraft.storagesilo;
 
 
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.config.Configuration;
 import uk.binarycraft.storagesilo.blocks.ModBlocks;
 import uk.binarycraft.storagesilo.blocks.craftingsilo.TileEntityCraftingSilo;
 import uk.binarycraft.storagesilo.blocks.storagesilo.TileEntityStorageSilo;
@@ -42,8 +42,7 @@ public class StorageSilo
 	public void preInit(FMLPreInitializationEvent event) throws Exception
 	{
 		getConfiguration(event);
-		ModBlocks.init();
-		registerTileEntities();
+		ModBlocks.preInit();
 	}
 
 
@@ -74,9 +73,10 @@ public class StorageSilo
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
+		proxy.registerItemModels();
+		proxy.initClient();
 		proxy.initCommon();
 		proxy.initServer();
-		proxy.initClient();
 	}
 
 

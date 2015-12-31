@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "normal": {
+      "model": "storagesilo:craftingsilo_model"
+    },
+    "inventory": {
+      "model": "storagesilo:craftingsilo_model"
+    }
+  }
+}
