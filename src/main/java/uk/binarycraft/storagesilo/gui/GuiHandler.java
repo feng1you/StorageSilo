@@ -1,10 +1,10 @@
 package uk.binarycraft.storagesilo.gui;
 
-import net.minecraft.util.BlockPos;
-import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.IGuiHandler;
 import uk.binarycraft.storagesilo.blocks.craftingsilo.BlockCraftingSilo;
 import uk.binarycraft.storagesilo.blocks.craftingsilo.ContainerCraftingSilo;
 import uk.binarycraft.storagesilo.blocks.craftingsilo.GuiCraftingSilo;

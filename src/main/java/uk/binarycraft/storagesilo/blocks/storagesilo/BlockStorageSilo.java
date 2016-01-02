@@ -44,7 +44,7 @@ public class BlockStorageSilo extends BlockContainerBase
 	{
 		TileEntityStorageSilo tileentity = (TileEntityStorageSilo) world.getTileEntity(blockPos);
 
-		dropInventory(world, blockPos.getX(), blockPos.getY(),blockPos.getZ(), blockState.getBlock(), tileentity);
+		dropInventory(world, blockPos.getX(), blockPos.getY(), blockPos.getZ(), blockState.getBlock(), tileentity);
 
 		super.breakBlock(world, blockPos, blockState);
 	}

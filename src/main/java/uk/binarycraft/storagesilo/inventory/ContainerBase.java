@@ -50,6 +50,7 @@ public class ContainerBase extends Container
 		return transferStackInSlotHelper(entityPlayer, i);
 	}
 
+
 	protected ItemStack transferStackInSlotHelper(EntityPlayer entityPlayer, int i)
 	{
 

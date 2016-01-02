@@ -66,6 +66,7 @@ public class ContainerCraftingSilo extends ContainerBase
 		}
 	}
 
+
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int i)
 	{

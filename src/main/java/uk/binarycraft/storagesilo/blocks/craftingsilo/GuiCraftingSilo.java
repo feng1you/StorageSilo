@@ -52,7 +52,7 @@ public class GuiCraftingSilo extends GuiContainer
 		super.initGui();
 		this.container = ((ContainerCraftingSilo) this.inventorySlots);
 		Keyboard.enableRepeatEvents(true);
-		this.searchField = new GuiTextField(1,this.fontRendererObj, this.guiLeft + 81, this.guiTop + 7, 85, this.fontRendererObj.FONT_HEIGHT);
+		this.searchField = new GuiTextField(1, this.fontRendererObj, this.guiLeft + 81, this.guiTop + 7, 85, this.fontRendererObj.FONT_HEIGHT);
 		this.searchField.setMaxStringLength(22);
 		this.searchField.setEnableBackgroundDrawing(false);
 		this.searchField.setVisible(true);
@@ -258,8 +258,7 @@ public class GuiCraftingSilo extends GuiContainer
 		{
 			int y1 = k + (int) ((float) (l - k - 17) * this.currentScroll);
 			this.drawTexturedModalRect(i1, y1, 0, 0, 12, 15);
-		}
-		else
+		} else
 		{
 			this.drawTexturedModalRect(i1, k, 0, 16, 12, 15);
 		}

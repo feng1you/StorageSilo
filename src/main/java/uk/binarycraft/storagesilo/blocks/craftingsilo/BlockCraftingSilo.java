@@ -21,6 +21,7 @@ public class BlockCraftingSilo extends BlockContainerBase
 		isBlockContainer = true;
 	}
 
+
 	@Override
 	public boolean onBlockActivated(World world, BlockPos blockPos, IBlockState blockState, EntityPlayer player, EnumFacing p6, float p7, float p8, float p9)
 	{

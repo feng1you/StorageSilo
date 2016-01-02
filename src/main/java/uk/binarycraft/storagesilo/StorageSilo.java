@@ -27,7 +27,8 @@ public class StorageSilo
 	public static StorageSilo instance;
 	@SidedProxy(clientSide = "uk.binarycraft.storagesilo.proxy.ClientProxy", serverSide = "uk.binarycraft.storagesilo.proxy.CommonProxy")
 	public static CommonProxy proxy;
-	public static CreativeTabs storageSiloCreativeTab = new CreativeTabs("StorageSilo") {
+	public static CreativeTabs storageSiloCreativeTab = new CreativeTabs("StorageSilo")
+	{
 		@Override
 		public Item getTabIconItem()
 		{
@@ -37,6 +38,7 @@ public class StorageSilo
 				return new ItemStack(ModBlocks.craftingSilo).getItem();
 		}
 	};
+
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) throws Exception

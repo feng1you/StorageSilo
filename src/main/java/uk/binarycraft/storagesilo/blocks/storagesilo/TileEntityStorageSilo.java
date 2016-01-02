@@ -86,18 +86,18 @@ public class TileEntityStorageSilo extends TileEntity implements IInventory
 	}
 
 
-//	@Override
-//	public String getInventoryName()
-//	{
-//		return "Storehouse";
-//	}
+	//	@Override
+	//	public String getInventoryName()
+	//	{
+	//		return "Storehouse";
+	//	}
 
 
-//	@Override
-//	public boolean hasCustomInventoryName()
-//	{
-//		return false;
-//	}
+	//	@Override
+	//	public boolean hasCustomInventoryName()
+	//	{
+	//		return false;
+	//	}
 
 
 	@Override
@@ -113,29 +113,33 @@ public class TileEntityStorageSilo extends TileEntity implements IInventory
 		return true;
 	}
 
-	@Override
-	public void openInventory(EntityPlayer player) {
-
-	}
 
 	@Override
-	public void closeInventory(EntityPlayer player) {
+	public void openInventory(EntityPlayer player)
+	{
 
 	}
 
 
-//	@Override
-//	public void openInventory()
-//	{
-//
-//	}
+	@Override
+	public void closeInventory(EntityPlayer player)
+	{
+
+	}
 
 
-//	@Override
-//	public void closeInventory()
-//	{
-//
-//	}
+	//	@Override
+	//	public void openInventory()
+	//	{
+	//
+	//	}
+
+
+	//	@Override
+	//	public void closeInventory()
+	//	{
+	//
+	//	}
 
 
 	@Override
@@ -144,23 +148,31 @@ public class TileEntityStorageSilo extends TileEntity implements IInventory
 		return true;
 	}
 
+
 	@Override
-	public int getField(int id) {
+	public int getField(int id)
+	{
 		return 0;
 	}
 
+
 	@Override
-	public void setField(int id, int value) {
+	public void setField(int id, int value)
+	{
 
 	}
 
+
 	@Override
-	public int getFieldCount() {
+	public int getFieldCount()
+	{
 		return 0;
 	}
 
+
 	@Override
-	public void clear() {
+	public void clear()
+	{
 
 	}
 
@@ -220,18 +232,24 @@ public class TileEntityStorageSilo extends TileEntity implements IInventory
 		super.markDirty();
 	}
 
+
 	@Override
-	public String getCommandSenderName() {
+	public String getCommandSenderName()
+	{
 		return null;
 	}
 
+
 	@Override
-	public boolean hasCustomName() {
+	public boolean hasCustomName()
+	{
 		return false;
 	}
 
+
 	@Override
-	public IChatComponent getDisplayName() {
+	public IChatComponent getDisplayName()
+	{
 		return null;
 	}
 }
