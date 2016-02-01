@@ -69,7 +69,7 @@ public class TileEntityStorageSilo extends TileEntity implements IInventory
 
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int p_70304_1_)
+	public ItemStack removeStackFromSlot(int index)
 	{
 		return null;
 	}
@@ -234,7 +234,7 @@ public class TileEntityStorageSilo extends TileEntity implements IInventory
 
 
 	@Override
-	public String getCommandSenderName()
+	public String getName()
 	{
 		return null;
 	}

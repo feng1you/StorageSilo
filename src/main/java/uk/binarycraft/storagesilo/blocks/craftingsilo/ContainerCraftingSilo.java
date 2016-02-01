@@ -60,7 +60,7 @@ public class ContainerCraftingSilo extends ContainerBase
 
 		for (int craftGridLoop = 0; craftGridLoop < 9; craftGridLoop++)
 		{
-			ItemStack itemStack = this.craftMatrix.getStackInSlotOnClosing(craftGridLoop);
+			ItemStack itemStack = this.craftMatrix.getStackInSlot(craftGridLoop); // was getStackInSlotOnClosing in 1.8.8
 			if (itemStack != null)
 				player.dropPlayerItemWithRandomChoice(itemStack, false);
 		}
