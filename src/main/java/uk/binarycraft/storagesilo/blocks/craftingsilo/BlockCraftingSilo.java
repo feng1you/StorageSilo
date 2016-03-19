@@ -3,8 +3,11 @@ package uk.binarycraft.storagesilo.blocks.craftingsilo;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import uk.binarycraft.storagesilo.StorageSilo;
@@ -17,13 +20,13 @@ public class BlockCraftingSilo extends BlockContainerBase
 	public BlockCraftingSilo()
 	{
 		super(Material.iron, "craftingsilo", 2.5f, null);
-		setStepSound(soundTypeMetal);
+		//TODO: setStepSound(soundTypeMetal);
 		isBlockContainer = true;
 	}
 
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos blockPos, IBlockState blockState, EntityPlayer player, EnumFacing p6, float p7, float p8, float p9)
+	public boolean onBlockActivated(World world, BlockPos blockPos, IBlockState blockState, EntityPlayer player, EnumHand enumHand, ItemStack itemStack, EnumFacing p6, float p7, float p8, float p9)
 	{
 		player.openGui(StorageSilo.instance, GuiHandler.GUI.STORAGESILO.ordinal, world, blockPos.getX(), blockPos.getY(), blockPos.getZ());
 		return true;
@@ -50,8 +53,8 @@ public class BlockCraftingSilo extends BlockContainerBase
 
 
 	@Override
-	public int getRenderType()
+	public EnumBlockRenderType getRenderType(IBlockState blockState)
 	{
-		return 3;
+		return EnumBlockRenderType.MODEL;
 	}
 }

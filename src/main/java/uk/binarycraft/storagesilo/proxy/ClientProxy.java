@@ -1,7 +1,7 @@
 package uk.binarycraft.storagesilo.proxy;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import uk.binarycraft.storagesilo.blocks.ModBlocks;
 

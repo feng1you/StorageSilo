@@ -12,9 +12,9 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import uk.binarycraft.storagesilo.StorageSilo;
@@ -106,11 +106,7 @@ public class BlockContainerBase extends BlockContainer
 	}
 
 
-	@Override
-	public boolean onBlockActivated(World world, BlockPos blockPos, IBlockState blockState, EntityPlayer player, EnumFacing side, float p7, float p8, float p9)
-	{
-		return super.onBlockActivated(world, blockPos, blockState, player, side, p7, p8, p9);
-	}
+
 
 
 	public void dropInventory(World world, int x, int y, int z, Block block, IInventory tileentity)
