@@ -1,0 +1,5 @@
+tile.storagesilo.name=存储仓库
+tile.craftingsilo.name=合成仓库
+itemGroup.StorageSilo=存储仓库
+gui.storagesilo=存储仓库
+gui.craftingsilo=合成仓库
